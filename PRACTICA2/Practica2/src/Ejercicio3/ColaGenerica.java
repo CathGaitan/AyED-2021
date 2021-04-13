@@ -1,0 +1,24 @@
+package Ejercicio3;
+import tp02.ejercicio2.*;
+public class ColaGenerica<T>{
+    private final ListaGenerica<T> cola;
+    public ColaGenerica(ListaGenerica<T> tipoDeLista){ //CONSTRUCTOR
+        this.cola=tipoDeLista;
+    }
+    
+    public void encolar(T elem){ //Agrega elem a la cola.
+        cola.agregarFinal(elem);
+    }
+    public T desencolar(){ //Elimina y devuelve el primer elemento de la cola.
+        T elem = tope(); //me guardo el elemento que voy a eliminar
+        cola.eliminarEn(0);
+        return elem; //retorno el elemento que borre
+    }
+    public T tope(){ //Devuelve el elemento en el tope de la cola sin eliminarlo
+        return cola.elemento(0);
+    }
+    public boolean esVacia(){
+        return cola.esVacia();
+    }
+    
+}
