@@ -1,5 +1,4 @@
-package Ejercicio3;
-import tp02.ejercicio2.*;
+package tp02.ejercicio2;
 public class PilaGenerica<T>{
     private final ListaGenerica<T> pila;
     
