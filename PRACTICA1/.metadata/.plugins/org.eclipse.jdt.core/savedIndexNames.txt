@@ -1,2 +1,0 @@
-INDEX VERSION 1.131+C:\Users\Cath\Desktop\Facultad\2do anio\AyED\PRACTICA\PRACTICA1\.metadata\.plugins\org.eclipse.jdt.core
-1391538861.index
