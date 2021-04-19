@@ -1,4 +1,4 @@
-package tp02.ejercicio2;
+package PackDeCosas;
 /**
  * La clase ListaGenericaEnlazada es una ListaGenerica, donde los elementos de
  * la lista (nodos) referencian al siguiente elemento (nodo), por este motivo,
@@ -201,7 +201,7 @@ public class ListaEnlazadaGenerica<T> extends ListaGenerica<T> {
 
 	@Override
 	public ListaGenerica<T> clonar() {
-		ListaGenerica<T> nueva = new ListaEnlazadaGenerica<T>();
+		ListaGenerica<T> nueva = new ListaEnlazadaGenerica<>();
 		this.comenzar();
 		while (!this.fin()) {
 			nueva.agregarFinal(this.proximo());
@@ -218,7 +218,7 @@ public class ListaEnlazadaGenerica<T> extends ListaGenerica<T> {
             }
             return true;
         }
-        
+        @Override
         public int posicion (T elem) {
             int i=1;
             this.comenzar();

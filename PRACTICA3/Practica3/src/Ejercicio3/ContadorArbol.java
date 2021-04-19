@@ -1,30 +1,40 @@
 package Ejercicio3;
-import tp02.ejercicio2.*;
-import Ejercicio1y2.ArbolBinario;
-
+import PackDeCosas.*;
 public class ContadorArbol {
-    ArbolBinario<Integer> arbol = new ArbolBinario<>();
+    private ArbolBinario<Integer> arbol = new ArbolBinario<>();
     
-    public ListaEnlazadaGenerica<Integer> numerosParesPostorden(){
-        ListaEnlazadaGenerica<Integer> lista = new ListaEnlazadaGenerica<>();
+    private ListaEnlazadaGenerica<Integer> paresPostOrden(ArbolBinario<Integer> arbol,ListaEnlazadaGenerica<Integer> lista){
+        if(arbol.tieneHijoIzquierdo()){
+            paresPostOrden(arbol.getHijoIzquierdo(),lista);
+        }
+        if(arbol.tieneHijoDerecho()){
+            paresPostOrden(arbol.getHijoDerecho(),lista);
+        }
+        if((arbol.getDato()%2)==0){
+            lista.agregarFinal(arbol.getDato());
+        }
+        return lista;
+    }
+    
+    private ListaEnlazadaGenerica<Integer> paresInOrden(ArbolBinario<Integer> arbol,ListaEnlazadaGenerica<Integer> lista){
         if(arbol.tieneHijoIzquierdo())
-            arbol.getHijoIzquierdo().numerosParesPostorden();
+            paresInOrden(arbol.getHijoIzquierdo(),lista);
         if(arbol.tieneHijoDerecho())
-            arbol.getHijoDerecho().numerosPares();
+            paresInOrden(arbol.getHijoDerecho(),lista);
         if((arbol.getDato()%2)==0)
             lista.agregarFinal(arbol.getDato());
         return lista;
     }
-    
-    public ListaEnlazadaGenerica<Integer> numerosParesInorden(){
+
+    public ListaEnlazadaGenerica<Integer> numerosParesPostorden(){
         ListaEnlazadaGenerica<Integer> lista = new ListaEnlazadaGenerica<>();
-        if(arbol.tieneHijoIzquierdo())
-            arbol.getHijoIzquierdo().numerosPares();
-        if(arbol.tieneHijoDerecho())
-            arbol.getHijoDerecho().numerosPares();
-        if((arbol.getDato()%2)==0)
-            lista.agregarFinal(arbol.getDato());
+        this.paresPostOrden(arbol,lista);
         return lista;
-    }    
+    }
     
+    public ListaEnlazadaGenerica<Integer> numerosParesInOrden(){
+        ListaEnlazadaGenerica<Integer> lista = new ListaEnlazadaGenerica<>();
+        this.paresInOrden(arbol,lista);
+        return lista;
+    }
 }

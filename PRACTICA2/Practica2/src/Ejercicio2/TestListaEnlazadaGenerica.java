@@ -1,6 +1,6 @@
 package Ejercicio2;
 import java.util.Scanner;
-import tp02.ejercicio2.*;
+import PackDeCosas.*;
 public class TestListaEnlazadaGenerica {
     public static void main(String[] args) {
         Scanner consola = new Scanner(System.in);

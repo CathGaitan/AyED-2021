@@ -1,4 +1,4 @@
-package tp02.ejercicio2;
+package PackDeCosas;
 
 /**
  * ListaDeEnteros es una clase abstracta que define los métodos que deberán
@@ -119,6 +119,7 @@ public abstract class ListaGenerica<T> {
 	//public abstract void limpiar();
         
         public abstract boolean agregar(T[] vector);
+ 
         public abstract int posicion(T elem);
 }       
     

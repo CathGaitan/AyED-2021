@@ -1,4 +1,4 @@
-package tp02.ejercicio2;
+package PackDeCosas;
 public class PilaGenerica<T>{
     private final ListaGenerica<T> pila;
     
@@ -16,14 +16,14 @@ public class PilaGenerica<T>{
     public T desapilar(){
         if (!esVacia()){
             T elem=tope();
-            pila.eliminarEn(pila.tamanio());
+            pila.eliminarEn(1);
             return elem;
         }else{
             return null;
         }
     }
     public T tope(){
-        return pila.elemento(pila.tamanio());
+        return pila.elemento(1);
     }
     public boolean esVacia(){
         return pila.esVacia();

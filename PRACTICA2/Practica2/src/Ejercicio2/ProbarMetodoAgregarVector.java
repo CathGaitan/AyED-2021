@@ -1,6 +1,6 @@
 package Ejercicio2;
 import java.util.Scanner;
-import tp02.ejercicio2.ListaEnlazadaGenerica;
+import PackDeCosas.*;
 public class ProbarMetodoAgregarVector {
     public static void main(String[] args) {
         Scanner consola = new Scanner(System.in);

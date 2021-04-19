@@ -1,5 +1,4 @@
-package Ejercicio1y2;
-import tp02.ejercicio2.*;
+package PackDeCosas;
 public class ArbolBinario<T> {
     private T dato;
     private ArbolBinario<T> hijoIzquierdo;   
@@ -80,8 +79,11 @@ public class ArbolBinario<T> {
 	ListaGenerica<T> l = new ListaEnlazadaGenerica<>();
 	return l;
     }
-	
-    public int altura(){
+    
+//no hace falta verificar si esHoja, ya que si llega a serlo yo tengo inicializado
+//las variables en -1, y al sumarle 1 al return, me devuelve 0, lo que debe devolver
+//si llega a ser hoja
+    public int altura(){ 
         if (this.esVacio())
             return -1; //arbol vacio
         else{
@@ -113,23 +115,23 @@ public class ArbolBinario<T> {
             this.getHijoDerecho().printPreorden();
         System.out.println(this.getDato());
     }
-    public void printInorden(){  //REVISAR
+    public void printInorden(){
         if(this.tieneHijoIzquierdo())
-            this.getHijoIzquierdo().printPreorden();
+            this.getHijoIzquierdo().printInorden();
         System.out.println(this.getDato());       
         if(this.tieneHijoDerecho())
-            this.getHijoDerecho().printPreorden(); 
+            this.getHijoDerecho().printInorden(); 
     }
 
     public void printPorNiveles() {
-        ColaGenerica<ArbolBinario<T>> cola= new ColaGenerica<>();
-        ArbolBinario <T> arbol=null;
+        ColaGenerica <ArbolBinario<T>> cola = new ColaGenerica<ArbolBinario<T>>();
+        ArbolBinario <T> arbol;
         cola.encolar(this);
         cola.encolar(null);
         while(!cola.esVacia()){
             arbol=cola.desencolar();
             if(arbol != null){
-                System.out.print(arbol.getDato());
+                System.out.println(arbol.getDato());
                 if(arbol.tieneHijoIzquierdo())
                     cola.encolar(arbol.getHijoIzquierdo());
                 if(arbol.tieneHijoDerecho())
@@ -153,11 +155,11 @@ public class ArbolBinario<T> {
                 if(arbol == null){ //si llegue al fin del nivel
                     if(!cola.esVacia()){
                          cola.encolar(null);
-                        altura++;
+                        altura++; 
                     }
                 } else {
                     if((n<=altura)&&(m>=altura)){
-                        System.out.print(arbol.getDato());
+                        System.out.println(arbol.getDato());
                     }
                     if(arbol.tieneHijoIzquierdo())
                         cola.encolar(arbol.getHijoIzquierdo());
@@ -185,16 +187,16 @@ public class ArbolBinario<T> {
     public int contarNodos(){
         int cantidad=0;
         if (!this.esVacio()){
-            cantidad++;
+            cantidad++; //si no esta vacio cuento un nodo
             if(this.tieneHijoIzquierdo())
-                cantidad+=this.getHijoIzquierdo().contarNodos();
+                cantidad+=this.getHijoIzquierdo().contarNodos(); //llamo recursivamente con el HI
             if(this.tieneHijoDerecho())
-                cantidad+=this.getHijoDerecho().contarNodos();
+                cantidad+=this.getHijoDerecho().contarNodos(); //llamo recursivamente con el HD
         }
         return cantidad;
     }
         
-    public ArbolBinario<T> espejo(){  //INCORRECTO
+    public ArbolBinario<T> espejo(){
         if(this.esVacio()){
             return new ArbolBinario<>();
         }else{

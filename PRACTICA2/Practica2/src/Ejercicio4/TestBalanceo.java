@@ -1,6 +1,5 @@
 package Ejercicio4;
-import tp02.ejercicio2.*;
-import Ejercicio3.*;
+import PackDeCosas.*;
 import java.util.Scanner;
 public class TestBalanceo {
     private static boolean esBalanceado(String s){

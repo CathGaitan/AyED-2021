@@ -1,4 +1,4 @@
-package tp02.ejercicio2;
+package PackDeCosas;
 /**
  * Esta clase representa un nodo de la lista enlazada.
  * */
