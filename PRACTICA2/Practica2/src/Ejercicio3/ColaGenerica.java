@@ -25,5 +25,4 @@ public class ColaGenerica<T>{
     public boolean esVacia(){
         return cola.esVacia();
     }
-    
 }

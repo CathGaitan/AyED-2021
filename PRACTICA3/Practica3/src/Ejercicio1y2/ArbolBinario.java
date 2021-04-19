@@ -81,21 +81,19 @@ public class ArbolBinario<T> {
 	return l;
     }
 	
-    public int altura(){ //INCORRECTO
-        int altIzq=0,altDer=0;
+    public int altura(){
         if (this.esVacio())
             return -1; //arbol vacio
         else{
+            int altIzq=-1,altDer=-1;
             if(this.tieneHijoIzquierdo()){
-                altIzq++;
-                this.getHijoIzquierdo().altura();
+                altIzq=this.getHijoIzquierdo().altura();
             }
             if(this.tieneHijoDerecho()){
-                altDer++;
-                this.getHijoDerecho().altura();
+                altDer=this.getHijoDerecho().altura();
             }
+            return Math.max(altIzq, altDer)+1;
         }
-        return Math.max(altIzq, altDer);
     }
  
  //----------------PRINTS------------------------------------------
@@ -143,41 +141,57 @@ public class ArbolBinario<T> {
         }            	
     }
 
-    public void entreNiveles(int n, int m){ //INCORRECTO
+    public void entreNiveles(int n, int m){ 
+        int altura=0;
         ColaGenerica<ArbolBinario<T>> cola= new ColaGenerica<>();
-        ArbolBinario <T> arbol=null;
-        int nivel=0;
-        if ((n>=0)&&(n<m)&&(m<=this.altura())){
-            cola.encolar(this); //encolo el arbol entero
-            cola.encolar(null);
+        ArbolBinario <T> arbol;
+        cola.encolar(this);
+        cola.encolar(null);
+        if ((n>=0)&&(m<=this.altura())){
             while(!cola.esVacia()){
                 arbol=cola.desencolar();
-                if ((arbol != null)&&(n<=nivel)&&(m>=nivel)){
-                    System.out.print(arbol.getDato());
+                if(arbol == null){ //si llegue al fin del nivel
+                    if(!cola.esVacia()){
+                         cola.encolar(null);
+                        altura++;
+                    }
+                } else {
+                    if((n<=altura)&&(m>=altura)){
+                        System.out.print(arbol.getDato());
+                    }
                     if(arbol.tieneHijoIzquierdo())
                         cola.encolar(arbol.getHijoIzquierdo());
                     if(arbol.tieneHijoDerecho())
                         cola.encolar(arbol.getHijoDerecho());
-                }else if (!cola.esVacia()){
-                    System.out.println();
-                    cola.encolar(null);
                 }
             }
         }
     }
 
 //----------------------------------------------------------------------
-    public int contarHojas() {  //INCORRECTO
-        int cont=0;
-        if(this.esHoja())
+    public int contarHojas() { 
+        int contHI=0,contHD=0;
+        if(this.esHoja()){
             return 1;
-        if(this.tieneHijoIzquierdo())
-            this.getHijoIzquierdo().contarHojas();
-        if(this.tieneHijoDerecho())
-            this.getHijoDerecho().contarHojas();
-        if (this.esHoja())
-            cont++;
-        return cont;
+        }else{
+            if(this.tieneHijoIzquierdo())
+                contHI=this.getHijoIzquierdo().contarHojas();
+            if(this.tieneHijoDerecho())
+                contHD=this.getHijoDerecho().contarHojas();
+        }
+        return contHI+contHD;
+    }
+    
+    public int contarNodos(){
+        int cantidad=0;
+        if (!this.esVacio()){
+            cantidad++;
+            if(this.tieneHijoIzquierdo())
+                cantidad+=this.getHijoIzquierdo().contarNodos();
+            if(this.tieneHijoDerecho())
+                cantidad+=this.getHijoDerecho().contarNodos();
+        }
+        return cantidad;
     }
         
     public ArbolBinario<T> espejo(){  //INCORRECTO
@@ -189,8 +203,9 @@ public class ArbolBinario<T> {
                 nuevoArbol.agregarHijoDerecho(this.getHijoIzquierdo());
             if (this.tieneHijoDerecho())
                 nuevoArbol.agregarHijoIzquierdo(this.getHijoDerecho());
-        }
             return nuevoArbol;
         }
-
+    }
+    
+   
 }

@@ -218,4 +218,15 @@ public class ListaEnlazadaGenerica<T> extends ListaGenerica<T> {
             }
             return true;
         }
+        
+        public int posicion (T elem) {
+            int i=1;
+            this.comenzar();
+            while (!this.fin()) {
+                if (this.proximo().equals(elem))
+                    return i;
+                i++;
+            }
+            return i;  
+        }
 }

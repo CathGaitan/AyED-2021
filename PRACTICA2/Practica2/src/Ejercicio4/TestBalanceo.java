@@ -17,11 +17,11 @@ public class TestBalanceo {
         Character actual,elem;
         for (int i=0; i<s.length();i++){
             actual = s.charAt(i); //actual=Caracter de mi String
-            if (apertura.incluye(actual)){
-                pila.apilar(actual);
+            if (apertura.incluye(actual)){ 
+                pila.apilar(actual); //si es de apertura, lo apilo
             }else{
                 elem=pila.desapilar();
-                if (apertura.elemento(elem) != cierre.elemento(actual))
+                if(apertura.posicion(elem) != cierre.posicion(actual))
                     return false;
             }
         }
