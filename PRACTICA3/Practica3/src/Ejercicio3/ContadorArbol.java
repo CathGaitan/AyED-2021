@@ -1,7 +1,7 @@
 package Ejercicio3;
 import PackDeCosas.*;
 public class ContadorArbol {
-    private ArbolBinario<Integer> arbol = new ArbolBinario<>();
+    //private ArbolBinario<Integer> arbol = new ArbolBinario<>();
     
     private ListaEnlazadaGenerica<Integer> paresPostOrden(ArbolBinario<Integer> arbol,ListaEnlazadaGenerica<Integer> lista){
         if(arbol.tieneHijoIzquierdo()){
@@ -17,22 +17,25 @@ public class ContadorArbol {
     }
     
     private ListaEnlazadaGenerica<Integer> paresInOrden(ArbolBinario<Integer> arbol,ListaEnlazadaGenerica<Integer> lista){
-        if(arbol.tieneHijoIzquierdo())
+        if(arbol.tieneHijoIzquierdo()){
             paresInOrden(arbol.getHijoIzquierdo(),lista);
-        if(arbol.tieneHijoDerecho())
-            paresInOrden(arbol.getHijoDerecho(),lista);
-        if((arbol.getDato()%2)==0)
+        }
+        if((arbol.getDato()%2)==0){
             lista.agregarFinal(arbol.getDato());
+        }
+        if(arbol.tieneHijoDerecho()){
+            paresInOrden(arbol.getHijoDerecho(),lista);
+        }         
         return lista;
     }
 
-    public ListaEnlazadaGenerica<Integer> numerosParesPostorden(){
+    public ListaEnlazadaGenerica<Integer> numerosParesPostorden(ArbolBinario<Integer> arbol){
         ListaEnlazadaGenerica<Integer> lista = new ListaEnlazadaGenerica<>();
         this.paresPostOrden(arbol,lista);
         return lista;
     }
     
-    public ListaEnlazadaGenerica<Integer> numerosParesInOrden(){
+    public ListaEnlazadaGenerica<Integer> numerosParesInOrden(ArbolBinario<Integer> arbol){
         ListaEnlazadaGenerica<Integer> lista = new ListaEnlazadaGenerica<>();
         this.paresInOrden(arbol,lista);
         return lista;

@@ -20,6 +20,20 @@ public class PruebaMetodosPares {
         dos.agregarHijoIzquierdo(treintaYTres);
         dos.agregarHijoDerecho(cientoDos);
         
+        System.out.println("---PARES DEL POSTORDEN---");
+        ContadorArbol cont = new ContadorArbol();
+        ListaEnlazadaGenerica<Integer> lista =cont.numerosParesPostorden(catorce);
+        lista.comenzar();
+        while(!lista.fin()){
+            System.out.println(lista.proximo());
+        }
+        
+        System.out.println("---PARES DEL INORDEN---");
+        ListaEnlazadaGenerica<Integer> lista2 =cont.numerosParesInOrden(catorce);
+        lista2.comenzar();
+        while(!lista2.fin()){
+            System.out.println(lista2.proximo());
+        }
 
     }
 }

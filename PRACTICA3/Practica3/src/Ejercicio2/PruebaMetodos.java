@@ -32,5 +32,11 @@ public class PruebaMetodos {
         ArbolBinario<String> arbolEspejo = a.espejo();
         System.out.println("----PREORDEN ESPEJO---");
         arbolEspejo.printPreorden();
+        
+        if(a.esLleno()){
+            System.out.println("ES LLENO");
+        }else{
+            System.out.println("NO ES LLENO");
+        }
     }
 }
