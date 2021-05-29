@@ -1,4 +1,4 @@
-public class Ejercicio4 {
+public class Ejercicio5 {
     private static Random rand = new Random();
     public static int[] randomUno(int n) { //n=4 --> [0,1,2,3]
         int i, x = 0, k;
