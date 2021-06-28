@@ -1,0 +1,104 @@
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+public class EjercicioDFS {
+
+        Grafo<String> mapa;
+        
+        public ListaGenerica<String> buscarCamino(String origen, String destino) {
+                ListaGenerica<Vertice<String>> vertices = mapa.listaDeVertices();
+                Vertice<String> verticeOrigen = null, verticeDestino = null;
+                boolean[] marca = new boolean[vertices.tamanio() + 1];
+                ListaGenerica<String> camino = new ListaEnlazadaGenerica<String>();
+
+                vertices.comenzar();
+                while (!vertices.fin()) {
+                        Vertice<String> actual = vertices.proximo();
+                        if (actual.dato().equals(origen)) {
+                                verticeOrigen = actual;
+                        }
+                        if (actual.dato().equals(destino)) {
+                                verticeDestino = actual;
+                        }
+                }
+
+                if (verticeOrigen != null && verticeDestino != null) {
+                        dfs(verticeOrigen, verticeDestino, marca, camino);
+                }
+                return camino;
+        }
+
+        private boolean dfs(Vertice<String> verticeOrigen, Vertice<String> verticeDestino, boolean[] marca,ListaGenerica<String> camino) {
+
+                marca[verticeOrigen.getPosicion()] = true;
+                camino.agregarFinal(verticeOrigen.dato());	
+                if (verticeOrigen == verticeDestino) {
+                        return true;
+                }
+                else {
+                        ListaGenerica<Arista<String>> ady =  mapa.listaDeAdyacentes(verticeOrigen);
+                        ady.comenzar();
+                        while (!ady.fin()) {
+                                Arista<String> arista = ady.proximo();
+                                Vertice<String> siguiente = arista.verticeDestino();
+                                
+                                if (!marca[siguiente.getPosicion()]) {
+                                        boolean resultado = this.dfs(siguiente, verticeDestino, marca, camino);
+                                        if (resultado) {
+                                                return true;
+                                        }
+                                }
+                        }
+                }
+                	// marca[verticeOrigen.getPosicion()] = false;  <-- cuando busco todos los camino o un mejor camino
+                
+                camino.eliminarEn(camino.tamanio());
+                return false;
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        public static void main(String[] args) {
+                
+                Grafo<String> grafo = new GrafoImplListAdy<String>();
+                Vertice<String> vertice1 = new VerticeImplListAdy<String>("1");
+                grafo.agregarVertice(vertice1);
+                Vertice<String> vertice2 = new VerticeImplListAdy<String>("2");
+                grafo.agregarVertice(vertice2);
+                Vertice<String> vertice3 = new VerticeImplListAdy<String>("3");
+                grafo.agregarVertice(vertice3);
+                Vertice<String> vertice4 = new VerticeImplListAdy<String>("4");
+                grafo.agregarVertice(vertice4);
+                Vertice<String> vertice5 = new VerticeImplListAdy<String>("5");
+                grafo.agregarVertice(vertice5);
+                
+                grafo.conectar(vertice1, vertice2);
+                grafo.conectar(vertice2, vertice1);
+                
+                grafo.conectar(vertice2, vertice3);
+                grafo.conectar(vertice3, vertice2);
+                
+                grafo.conectar(vertice1, vertice3);
+                grafo.conectar(vertice3, vertice1);
+                
+                grafo.conectar(vertice3, vertice4);
+                grafo.conectar(vertice4, vertice3);
+                
+                grafo.conectar(vertice3, vertice5);
+                grafo.conectar(vertice5, vertice3);
+                
+                EjercicioDFS e = new EjercicioDFS();
+                e.mapa = grafo;
+                
+                ListaGenerica<String> camino = e.buscarCamino("1", "5");
+                
+                camino.comenzar();
+                while (!camino.fin()) {
+                        System.out.println(camino.proximo());
+                }
+        }
+}
